@@ -29,3 +29,18 @@ function debounce(func, wait) {
         timeout = setTimeout(later, wait);
     };
 }
+
+const dynamicEventListeners = [];
+function addDynamicEventListener(event, selector, handler) {
+  if (!dynamicEventListeners[event]) {
+    dynamicEventListeners[event] = [];
+    document.addEventListener(event, function (e) {
+      for (const listener of dynamicEventListeners[event]) {
+        if (e.target.matches(listener.selector)) {
+          listener.handler(e);
+        }
+      }
+    });
+  }
+  dynamicEventListeners[event].push({ selector: selector, handler: handler });
+}

@@ -1,5 +1,3 @@
-/* better.js includes useful functions JS should have by default */
-
 function cloneObject(object) {
     if (typeof structuredClone === "function") {
         return structuredClone(object);
